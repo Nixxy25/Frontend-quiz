@@ -1,19 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState ={
-    quizzes:null,
+    data: [],
     loading:false,
     error:"",
 }
 
 export const fetchData = createAsyncThunk('data/fetchData', async () =>{
-    const response = await fetch ('/src/data.json');
-    const data = await response.json();
-    return data.quizzes;
-})
+    const response = await axios.get('/src/data.json');
+    const data = await response.json(); // Parse response as JSON
+    return data;
+});
 
 const dataSlice = createSlice({
-    name:'quizzes',
+    name:'data',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -32,5 +33,9 @@ const dataSlice = createSlice({
         })
     }
 })
+
+export const selectData = (state) => state.data.data;
+export const selectLoading = (state) => state.data.loading;
+export const selectError = (state) => state.data.error;
 
 export default dataSlice.reducer;

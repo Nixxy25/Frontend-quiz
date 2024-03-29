@@ -2,7 +2,7 @@
 
 const AccessibilityPage = () => {
   return (
-    <div>accessibilityPage</div>
+    <div className="">accessibilityPage</div>
   )
 }
 

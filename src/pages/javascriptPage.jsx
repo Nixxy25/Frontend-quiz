@@ -1,15 +1,20 @@
+import { useSelector } from "react-redux";
+import { selectData } from "../reducers/dataSlice";
 
-
-const JavascriptPage = ({data}) => {
-
+const JavascriptPage = () => {
+    const data = useSelector(selectData);
 
   return (
     <div>
-        {data.map((items, index) => (
-            <div key={index}>
-                {items.title}
-            </div>
-        ))}
+    {data && (
+        <div>
+            {data.map((items) => (
+                <div key={items.id}>
+                    {items.question}
+                </div>
+            ))}
+        </div>
+    )}
     </div>
   )
 }
