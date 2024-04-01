@@ -9,7 +9,7 @@ const initialState ={
 
 export const fetchData = createAsyncThunk('data/fetchData', async () =>{
     const response = await axios.get('/src/data.json');
-    const data = await response.json(); // Parse response as JSON
+    const data = await response.json(); 
     return data;
 });
 
