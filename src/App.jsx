@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch} from "react-redux";
-import { fetchData } from "./reducers/dataSlice";
+import { fetchQuizs } from "./reducers/dataSlice";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import HtmlPage from "./pages/htmlPage";
@@ -16,7 +16,7 @@ const App = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchData())
+    dispatch(fetchQuizs())
  
   }, [])
 

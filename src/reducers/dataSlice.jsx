@@ -2,40 +2,40 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState ={
-    data: [],
+    quizs: [],
     loading:false,
     error:"",
 }
 
-export const fetchData = createAsyncThunk('data/fetchData', async () =>{
-    const response = await axios.get('/src/data.json');
-    const data = await response.json(); // Parse response as JSON
+export const fetchQuizs = createAsyncThunk('quiz/fetchQuizs', async () => {
+    const response = await axios.get("../data.json");
+    const data = response.data;
+    console.log(data);
     return data;
-});
+    
+  });
 
 const dataSlice = createSlice({
-    name:'data',
+    name:'quiz',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchData.pending, (state) => {
+        builder.addCase(fetchQuizs.pending, (state) => {
             state.loading = true;
         })
-        builder.addCase(fetchData.fulfilled, (state, action) => {
+        builder.addCase(fetchQuizs.fulfilled, (state, action) => {
             state.loading = false;
-            state.data = action.payload;
+            state.quizs = action.payload;
             state.error= "";
         })
-        builder.addCase(fetchData.rejected, (state, action) => {
+        builder.addCase(fetchQuizs.rejected, (state, action) => {
             state.loading = false;
-            state.data = [];
+            state.quizs = [];
             state.error= action.error.message;
         })
     }
 })
 
-export const selectData = (state) => state.data.data;
-export const selectLoading = (state) => state.data.loading;
-export const selectError = (state) => state.data.error;
+
 
 export default dataSlice.reducer;
