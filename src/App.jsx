@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchQuizs())
  
-  }, [])
+  }, [dispatch])
 
   return (
   <Routes>

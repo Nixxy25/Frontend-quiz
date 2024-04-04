@@ -7,10 +7,9 @@ const initialState ={
     error:"",
 }
 
-export const fetchQuizs = createAsyncThunk('quiz/fetchQuizs', async () => {
-    const response = await axios.get("../data.json");
-    const data = response.data;
-    console.log(data);
+export const fetchData = createAsyncThunk('data/fetchData', async () =>{
+    const response = await axios.get('/src/data.json');
+    const data = await response.json(); 
     return data;
     
   });
