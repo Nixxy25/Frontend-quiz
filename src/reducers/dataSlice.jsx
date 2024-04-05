@@ -19,15 +19,15 @@ const dataSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchQuizs.pending, (state) => {
+        builder.addCase(fetchData.pending, (state) => {
             state.loading = true;
         })
-        builder.addCase(fetchQuizs.fulfilled, (state, action) => {
+        builder.addCase(fetchData.fulfilled, (state, action) => {
             state.loading = false;
             state.quizs = action.payload;
             state.error= "";
         })
-        builder.addCase(fetchQuizs.rejected, (state, action) => {
+        builder.addCase(fetchData.rejected, (state, action) => {
             state.loading = false;
             state.quizs = [];
             state.error= action.error.message;
