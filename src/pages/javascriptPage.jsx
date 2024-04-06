@@ -18,7 +18,7 @@ const JavascriptPage = () => {
       <h2>Home</h2>
       {quiz.loading ? (
         <p>Loading quizzes...</p>
-      ) : quiz.quizs.length ? (
+      ) : quiz.quizs.length ? 
         <ul>
           {quiz.quizs.map((quiz) => (
             <li key={quiz.id}>{quiz.title}</li>

@@ -11,14 +11,11 @@ import AccessibilityPage from "./pages/accessibilityPage";
 import "./App.css"
 
 const App = () => {
-
-
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchQuizs())
  
-  }, [dispatch])
+  }, [])
 
   return (
   <Routes>
