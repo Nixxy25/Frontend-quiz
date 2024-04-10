@@ -1,40 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
-const initialState ={
-    quizs: [],
-    loading:false,
-    error:null,
-}
-
-export const fetchQuizs = createAsyncThunk('data/fetchData', async () =>{
-    const response = await axios.get('../data.json');
-    const data = await response.json(); 
-    return data;
-    
+export const fetchQuizs = createAsyncThunk("dataUsers", async (args, {rejectWithValue}) => {
+    const response = await fetch("/data.json");
+    try{
+        const result = response.json(); 
+        return result;
+    } catch(error){
+        return rejectWithValue('opps found an error')
+    }
   });
 
-const dataSlice = createSlice({
-    name:'quiz',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(fetchQuizs.pending, (state) => {
+export const dataUser = createSlice({
+    name:'dataUser',
+    initialState:{
+        users: [],
+        loading:false,
+        error:null,
+    },
+    extraReducers: (builders) => {
+        builders.addCase(fetchQuizs.pending, (state) => {
             state.loading = true;
         })
-        builder.addCase(fetchQuizs.fulfilled, (state, action) => {
+        builders.addCase(fetchQuizs.fulfilled, (state, action) => {
             state.loading = false;
-            state.quizs = action.payload;
-            state.error= "";
+            state.users = action.payload;
         })
-        builder.addCase(fetchQuizs.rejected, (state, action) => {
+        builders.addCase(fetchQuizs.rejected, (state, action) => {
             state.loading = false;
-            state.quizs = [];
-            state.error= action.payload;
+            state.error = action.payload;
         })
     }
 })
 
 
-
-export default dataSlice.reducer;
+export default dataUser.reducer;

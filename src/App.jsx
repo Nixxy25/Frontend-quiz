@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { fetchQuizs } from "./reducers/dataSlice";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/homePage";
@@ -17,10 +17,19 @@ const App = () => {
  
   }, [])
 
+  const data = useSelector((state) => {
+    console.log("state..", state.app)
+    return state.app
+  })
+
+  const quiz = data.users.quizzes || []
+
+
+
   return (
   <Routes>
-    <Route path="/" element={<HomePage />} />
-    <Route path="/html" element={<HtmlPage />} />
+    <Route path="/" element={<HomePage  quiz = {quiz}/>} />
+    <Route path="/html" element={<HtmlPage  quiz = {quiz}/>} />
     <Route path="/javascript" element={<JavascriptPage />} />
     <Route path="/accessibility" element={<AccessibilityPage />} />
     <Route path="/css" element={<CssPage />} />
